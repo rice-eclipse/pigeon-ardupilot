@@ -6,6 +6,8 @@ bool ModePigeonLand::init(bool ignore_checks)
     // check if we have GPS and decide which LAND we're going to do
     control_position = copter.position_ok();
 
+    // We already know we are stabilized, so if there is GPS lock, we can just
+    // start going to our destination
     if(control_position){
         set_mode(Mode::Number::AUTO, ModeReason::PIGEON_GPS_LOCK);
     }
@@ -38,8 +40,10 @@ void ModeLand::run()
 {
     control_position = copter.position_ok();
     if (control_position) {
+        // GPS lock acquired! Can go to waypoint
         set_mode(Mode::Number::AUTO, ModeReason::PIGEON_GPS_LOCK);
     } else {
+        // We have no gps oh god oh no
         nogps_run();
     }
 }
@@ -63,14 +67,15 @@ void ModeLand::nogps_run()
         // set motors to full range
         motors->set_desired_spool_state(AP_Motors::DesiredSpoolState::THROTTLE_UNLIMITED);
 
-        // pause before beginning land descent
-        if (land_pause && millis()-land_start_time >= LAND_WITH_DELAY_MS) {
-            land_pause = false;
-        }
+        // pause before beginning land descent (from land mode - we don't need this!)
+        // if (land_pause && millis()-land_start_time >= LAND_WITH_DELAY_MS) {
+        //     land_pause = false;
+        // }
+        land_pause = false;
 
         land_run_vertical_control(land_pause);
     }
 
-    // call attitude controller
+    // call attitude controller, makes sure it doesn't flip on us!
     attitude_control->input_euler_angle_roll_pitch_euler_rate_yaw(target_roll, target_pitch, auto_yaw.get_heading().yaw_rate_cds);
 }
