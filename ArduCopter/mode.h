@@ -39,6 +39,8 @@ public:
         AUTOROTATE =   26,  // Autonomous autorotation
         AUTO_RTL =     27,  // Auto RTL, this is not a true mode, AUTO will report as this mode if entered to perform a DO_LAND_START Landing sequence
         TURTLE =       28,  // Flip over after crash
+        PIGEON_FALL =  29,  // throw mode but modified to detect unfolding through servo port
+        PIGEON_LAND =  30,  // landing without gps requirement, and auto when gps lock
 
         // Mode number 127 reserved for the "drone show mode" in the Skybrush
         // fork at https://github.com/skybrush-io/ardupilot
@@ -1123,7 +1125,45 @@ private:
 
 };
 
+class ModePigeonLand : public Mode {
 
+public:
+    // inherit constructor
+    using Mode::Mode;
+    Number mode_number() const override { return Number::PIGEON_LAND; }
+
+    bool init(bool ignore_checks) override;
+    void run() override;
+
+    bool requires_GPS() const override { return false; }
+    bool has_manual_throttle() const override { return false; }
+    bool allows_arming(AP_Arming::Method method) const override { return false; };
+    bool is_autopilot() const override { return true; }
+
+    bool is_landing() const override { return true; };
+
+    void do_not_use_GPS();
+
+    // returns true if LAND mode is trying to control X/Y position
+    bool controlling_position() const { return control_position; }
+
+    void set_land_pause(bool new_value) { land_pause = new_value; }
+
+protected:
+
+    const char *name() const override { return "PGLD"; }
+    const char *name4() const override { return "PGLD"; }
+
+private:
+
+    void gps_run();
+    void nogps_run();
+
+    bool control_position; // true if we are using an external reference to control position
+
+    uint32_t land_start_time;
+    bool land_pause;
+};
 class ModeLand : public Mode {
 
 public:
@@ -1656,6 +1696,66 @@ private:
     uint32_t free_fall_start_ms;    // system time free fall was detected
     float free_fall_start_velz;     // vertical velocity when free fall was detected
 };
+
+class ModePigeonFall : public Mode {
+
+    public:
+    // inherit constructor
+    using Mode::Mode;
+    Number mode_number() const override { return Number::PIGEON_FALL; }
+
+    bool init(bool ignore_checks) override;
+    void run() override;
+
+    bool requires_GPS() const override { return false; } 
+    // unlike throw mode, we don't know if GPS lock will exist
+    bool has_manual_throttle() const override { return false; }
+    bool allows_arming(AP_Arming::Method method) const override { return true; };
+    bool is_autopilot() const override { return false; }
+
+    // Throw types
+    enum class PigeonFallType {
+        Upward = 0,
+        Drop = 1,
+        RocketDrop = 2,
+    };
+
+    enum class PreThrowMotorState {
+        STOPPED = 0,
+        RUNNING = 1,
+    };
+
+protected:
+
+    const char *name() const override { return "PIGEON_FALL"; }
+    const char *name4() const override { return "PGFL"; }
+
+private:
+
+    bool unfold_detected();
+    bool throw_position_good() const;
+    bool throw_height_good() const;
+    bool throw_attitude_good() const;
+
+    // Throw stages
+    enum PigeonFallModeStage {
+        PigeonFall_Disarmed,
+        PigeonFall_Detecting,
+        PigeonFall_Wait_Throttle_Unlimited,
+        PigeonFall_Uprighting,
+        PigeonFall_HgtStabilise,
+        PigeonFall_PosHold
+    };
+
+    PigeonFallModeStage stage = PigeonFall_Disarmed;
+    PigeonFallModeStage prev_stage = PigeonFall_Disarmed;
+    uint32_t last_log_ms;
+    bool nextmode_attempted;
+    uint32_t free_fall_start_ms;    // system time free fall was detected
+    float free_fall_start_velz;
+};
+
+
 
 #if MODE_TURTLE_ENABLED == ENABLED
 class ModeTurtle : public Mode {

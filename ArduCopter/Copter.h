@@ -225,6 +225,8 @@ public:
     friend class ModeZigZag;
     friend class ModeAutorotate;
     friend class ModeTurtle;
+    friend class ModePigeonFall;
+    friend class ModePigeonLand;
 
     Copter(void);
 
@@ -953,6 +955,8 @@ private:
     ModeAcro mode_acro;
 #endif
 #endif
+    ModePigeonFall mode_pigeon_fall;
+    ModePigeonLand mode_pigeon_land;
     ModeAltHold mode_althold;
 #if MODE_AUTO_ENABLED == ENABLED
     ModeAuto mode_auto;

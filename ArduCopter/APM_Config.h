@@ -31,6 +31,9 @@
 //#define MODE_ZIGZAG_ENABLED   DISABLED            // disable zigzag mode support
 //#define OSD_ENABLED           DISABLED            // disable on-screen-display support
 
+#define PIGEON_UNFOLD_PORT      7                   // RC port for the PI to signal unfold
+#define PIGEON_UNFOLD_THRES     1500                // Servo signal threshold on unfold port
+
 // features below are disabled by default on all boards
 //#define CAL_ALWAYS_REBOOT                         // flight controller will reboot after compass or accelerometer calibration completes
 //#define DISALLOW_GCS_MODE_CHANGE_DURING_RC_FAILSAFE   // disable mode changes from GCS during Radio failsafes.  Avoids a race condition for vehicle like Solo in which the RC and telemetry travel along the same link

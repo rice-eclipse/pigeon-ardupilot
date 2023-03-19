@@ -9,7 +9,7 @@ import sys
 import subprocess
 import json
 import fnmatch
-sys.path.insert(0, 'Tools/ardupilotwaf/')
+sys.path.insert(0, 'Tools/ardupilotwaf')
 
 import ardupilotwaf
 import boards

@@ -137,15 +137,6 @@ void Copter::init_ardupilot()
     init_precland();
 #endif
 
-#if AP_LANDINGGEAR_ENABLED
-    // initialise landing gear position
-    landinggear.init();
-#endif
-
-#ifdef USERHOOK_INIT
-    USERHOOK_INIT
-#endif
-
     // read Baro pressure at ground
     //-----------------------------
     barometer.set_log_baro_bit(MASK_LOG_IMU);
