@@ -175,6 +175,14 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
             break;
 #endif
 
+        case Mode::Number::PIGEON_FALL:
+            ret = &mode_pigeon_fall;
+            break;
+
+        case Mode::Number::PIGEON_LAND:
+            ret = &mode_pigeon_land;
+            break;
+
         default:
             break;
     }

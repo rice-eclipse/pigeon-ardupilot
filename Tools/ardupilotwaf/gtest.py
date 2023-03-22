@@ -3,6 +3,8 @@
 """
 gtest is a Waf tool for test builds in Ardupilot
 """
+import sys
+sys.path.append("../../modules/waf/")
 
 from waflib import Utils
 from waflib.Configure import conf

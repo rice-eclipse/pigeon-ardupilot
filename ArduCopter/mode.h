@@ -1151,7 +1151,7 @@ public:
 
 protected:
 
-    const char *name() const override { return "PGLD"; }
+    const char *name() const override { return "PIGEON_LAND"; }
     const char *name4() const override { return "PGLD"; }
 
 private:

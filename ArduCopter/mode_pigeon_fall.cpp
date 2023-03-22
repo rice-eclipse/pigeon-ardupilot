@@ -15,6 +15,7 @@ bool ModePigeonFall::init(bool ignore_checks)
 
     // init state
     stage = PigeonFall_Disarmed;
+    gcs().send_text(MAV_SEVERITY_INFO,"fall mode!");
     nextmode_attempted = false;
 
     // initialise pos controller speed and acceleration
@@ -246,6 +247,7 @@ void ModePigeonFall::run()
 
 bool ModePigeonFall::unfold_detected()
 {
+    gcs().send_text(MAV_SEVERITY_INFO, "%d", hal.rcin->read(PIGEON_UNFOLD_PORT));
     return hal.rcin->read(PIGEON_UNFOLD_PORT) > PIGEON_UNFOLD_THRES;
 }
 
