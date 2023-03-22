@@ -518,20 +518,12 @@ public:
     AP_Int8 throw_nextmode;
     AP_Enum<ModeThrow::ThrowType> throw_type;
 #endif
-
-    AP_Int8 pigeon_fall_nextmode;
-    AP_Enum<ModePigeonFall::PigeonFallType> pigeon_fall_type;
-
-#if MODE_PIGEON_FALL_ENABLED == ENABLED
     // Pigeon fall mode parameters
     AP_Int8 pigeon_fall_nextmode;
     AP_Enum<ModePigeonFall::PigeonFallType> pigeon_fall_type;
-#endif
 
-#if MODE_PIGEON_LAND_ENABLED == ENABLED
     // Pigeon land mode parameters
     AP_Int8 pigeon_land_nextmode;
-#endif
 
     // ground effect compensation enable/disable
     AP_Int8 gndeffect_comp_enabled;

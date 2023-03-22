@@ -1,7 +1,5 @@
 #include "Copter.h"
 
-const AP_HAL::HAL& hal = AP_HAL::get_HAL();
-
 // throw_init - initialise throw controller
 bool ModePigeonFall::init(bool ignore_checks)
 {

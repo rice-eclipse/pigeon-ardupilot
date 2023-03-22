@@ -36,7 +36,7 @@ bool ModePigeonLand::init(bool ignore_checks)
 
 // land_run - runs the land controller
 // should be called at 100hz or more
-void ModeLand::run()
+void ModePigeonLand::run()
 {
     control_position = copter.position_ok();
     if (control_position) {
@@ -51,7 +51,7 @@ void ModeLand::run()
 // land_nogps_run - runs the land controller
 //      pilot controls roll and pitch angles
 //      should be called at 100hz or more
-void ModeLand::nogps_run()
+void ModePigeonLand::nogps_run()
 {
     float target_roll = 0.0f, target_pitch = 0.0f;
 

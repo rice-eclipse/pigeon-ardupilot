@@ -756,7 +756,6 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     AP_GROUPINFO("THROW_TYPE", 4, ParametersG2, throw_type, (float)ModeThrow::ThrowType::Upward),
 #endif
 
-#if MODE_PIGEON_FALL_ENABLED == ENABLED
     // @Param: THROW_NEXTMODE
     // @DisplayName: Throw mode's follow up mode
     // @Description: Vehicle will switch to this mode after the pigeon fall is successfully completed.  Default is to go to Pigeon Land mode (30).
@@ -770,8 +769,6 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @Values: 0:Upward Throw,1:Drop,2:RocketDrop
     // @User: Standard
     AP_GROUPINFO("PIGEON_FALL_TYPE", 4, ParametersG2, pigeon_fall_type, (float)ModePigeonFall::PigeonFallType::RocketDrop),
-
-#endif
 
     // @Param: GND_EFFECT_COMP
     // @DisplayName: Ground Effect Compensation Enable/Disable
