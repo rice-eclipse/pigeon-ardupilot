@@ -1215,14 +1215,14 @@ const AP_Param::GroupInfo ParametersG2::var_info2[] = {
     // @Description: Vehicle will switch to this mode after the pigeon fall is successfully completed.  Default is to go to Pigeon Land mode (30).
     // @Values: 3:Auto,4:Guided,5:LOITER,6:RTL,9:Land,17:Brake,18:Throw,30:PigeonLand
     // @User: Standard
-    AP_GROUPINFO("FALL_NEXTMODE", 63, ParametersG2, pigeon_fall_nextmode, 30),
+    AP_GROUPINFO("FALL_NEXTMODE", 6, ParametersG2, pigeon_fall_nextmode, 30),
 
     // @Param: THROW_TYPE
     // @DisplayName: Type of Type
     // @Description: Used by Pigeon Fall mode. Specifies whether Copter is thrown upward or dropped.
     // @Values: 0:Upward Throw,1:Drop,2:RocketDrop
     // @User: Standard
-    AP_GROUPINFO("FALL_TYPE", 64, ParametersG2, pigeon_fall_type, (float)ModePigeonFall::PigeonFallType::RocketDrop),
+    AP_GROUPINFO("FALL_TYPE", 7, ParametersG2, pigeon_fall_type, (float)ModePigeonFall::PigeonFallType::RocketDrop),
 
     // ID 62 is reserved for the AP_SUBGROUPEXTENSION
 
