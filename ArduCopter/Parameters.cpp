@@ -756,20 +756,6 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     AP_GROUPINFO("THROW_TYPE", 4, ParametersG2, throw_type, (float)ModeThrow::ThrowType::Upward),
 #endif
 
-    // @Param: THROW_NEXTMODE
-    // @DisplayName: Throw mode's follow up mode
-    // @Description: Vehicle will switch to this mode after the pigeon fall is successfully completed.  Default is to go to Pigeon Land mode (30).
-    // @Values: 3:Auto,4:Guided,5:LOITER,6:RTL,9:Land,17:Brake,18:Throw,30:PigeonLand
-    // @User: Standard
-    AP_GROUPINFO("PIGEON_FALL_NEXTMODE", 3, ParametersG2, pigeon_fall_nextmode, 30),
-
-    // @Param: THROW_TYPE
-    // @DisplayName: Type of Type
-    // @Description: Used by Pigeon Fall mode. Specifies whether Copter is thrown upward or dropped.
-    // @Values: 0:Upward Throw,1:Drop,2:RocketDrop
-    // @User: Standard
-    AP_GROUPINFO("PIGEON_FALL_TYPE", 4, ParametersG2, pigeon_fall_type, (float)ModePigeonFall::PigeonFallType::RocketDrop),
-
     // @Param: GND_EFFECT_COMP
     // @DisplayName: Ground Effect Compensation Enable/Disable
     // @Description: Ground Effect Compensation Enable/Disable
@@ -1174,6 +1160,7 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
 
     // ID 62 is reserved for the SHOW_... parameters from the Skybrush fork at
     // https://github.com/skybrush-io/ardupilot
+    
 
     AP_GROUPEND
 };
@@ -1221,6 +1208,21 @@ const AP_Param::GroupInfo ParametersG2::var_info2[] = {
     // @Range: 0 5
     // @User: Advanced
     AP_GROUPINFO("SURFTRAK_TC", 5, ParametersG2, surftrak_tc, 1.0),
+
+
+    // @Param: THROW_NEXTMODE
+    // @DisplayName: Throw mode's follow up mode
+    // @Description: Vehicle will switch to this mode after the pigeon fall is successfully completed.  Default is to go to Pigeon Land mode (30).
+    // @Values: 3:Auto,4:Guided,5:LOITER,6:RTL,9:Land,17:Brake,18:Throw,30:PigeonLand
+    // @User: Standard
+    AP_GROUPINFO("FALL_NEXTMODE", 63, ParametersG2, pigeon_fall_nextmode, 30),
+
+    // @Param: THROW_TYPE
+    // @DisplayName: Type of Type
+    // @Description: Used by Pigeon Fall mode. Specifies whether Copter is thrown upward or dropped.
+    // @Values: 0:Upward Throw,1:Drop,2:RocketDrop
+    // @User: Standard
+    AP_GROUPINFO("FALL_TYPE", 64, ParametersG2, pigeon_fall_type, (float)ModePigeonFall::PigeonFallType::RocketDrop),
 
     // ID 62 is reserved for the AP_SUBGROUPEXTENSION
 
